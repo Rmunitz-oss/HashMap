@@ -40,16 +40,16 @@ public class OurHashMap<K,V> implements Map<K,V> {
 
     @Override
     public boolean containsKey(Object key) {
-        for (List<Entry> list : values){
-            if (list != null){
-                for (Entry entry : list){
-                    if (entry.key == key){
+        int hashcode = key.hashCode();
+        int index = Math.abs(hashcode) % SIZE;
+        List<Entry> list = values[index];
+        if (list != null){
+            for (Entry entry : list){
+                if (entry.key == key){
                         return true;
-                    }
                 }
             }
         }
-
         return false;
     }
 
@@ -72,12 +72,11 @@ public class OurHashMap<K,V> implements Map<K,V> {
         int hashcode = key.hashCode();
         int index = Math.abs(hashcode) % SIZE;
         List<Entry> list = values[index];
-        if (list == null) {
-            return null;
-        }
-        for (Entry entry : list) {
-            if (entry.key.equals(key)) {
-                return (V) entry.value;
+        if (list != null) {
+            for (Entry entry : list) {
+                if (entry.key.equals(key)) {
+                    return (V) entry.value;
+                }
             }
         }
         return null;

@@ -82,9 +82,24 @@ class OurHashMapTest {
     }
 
     @Test
+    void get(){
+        //given
+        OurHashMap<String,String> map = new OurHashMap<>();
+        map.put("ENGLISH1", "HELLO");
+        map.put("ENGLISH2", "HI");
+
+        //when
+
+        //then
+        assertEquals("HELLO", map.get("ENGLISH1"));
+        assertEquals("HI", map.get("ENGLISH2"));
+    }
+
+    @Test
     void getNull() {
         // given
         OurHashMap<String,String> map = new OurHashMap<>();
+
 
         // when
 
