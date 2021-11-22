@@ -108,10 +108,11 @@ public class OurHashMap<K,V> implements Map<K,V> {
     @Override
     //return value removed?
     public V remove(Object key) {
-        for (List<Entry> list : values){
-            if (list != null){
-                list.removeIf(entry -> entry.key == key);
-            }
+        int hashcode = key.hashCode();
+        int index = Math.abs(hashcode) % SIZE;
+        List<Entry> list = values[index];
+        if (list != null){
+            list.removeIf(entry -> entry.key == key);
         }
         return null;
     }
