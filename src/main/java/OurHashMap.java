@@ -40,17 +40,7 @@ public class OurHashMap<K,V> implements Map<K,V> {
 
     @Override
     public boolean containsKey(Object key) {
-        int hashcode = key.hashCode();
-        int index = Math.abs(hashcode) % SIZE;
-        List<Entry> list = values[index];
-        if (list != null){
-            for (Entry entry : list){
-                if (entry.key == key){
-                        return true;
-                }
-            }
-        }
-        return false;
+        return this.get(key) != null;
     }
 
     @Override
@@ -120,7 +110,8 @@ public class OurHashMap<K,V> implements Map<K,V> {
     @Override
     public void putAll(Map m) {
         m.forEach((key, value) -> {
-            this.put((K)key,(V)value);});
+            this.put((K)key,(V)value);
+        });
 
     }
 
